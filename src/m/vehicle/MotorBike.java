@@ -1,6 +1,6 @@
 package m.vehicle;
 
-public class MotorBike {
+public class MotorBike extends Vehicle {
 
 	public MotorBike() {
 		// TODO Auto-generated constructor stub
