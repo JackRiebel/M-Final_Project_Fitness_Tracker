@@ -2,15 +2,49 @@ package m.vehicleManager;
 
 import m.vehicle.*;
 import java.util.ArrayList;
-import java.util.Random;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class VehicleManager {
-    private String vehicleFilePath;
-    private ArrayList<Vehicle> vehicleList;
+    private String vehicleFilePath = "src/vehicleList.csv";
+    private ArrayList<Vehicle> vehicleList = new ArrayList<>();
 
+    public boolean initializeStock() {
+        try (BufferedReader br = new BufferedReader(new FileReader(vehicleFilePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] vehicleData = line.split(",");
+
+                // Check the type of vehicle and create appropriate object
+                Vehicle vehicle;
+                switch (vehicleData[0].toLowerCase()) { // Assuming first column is vehicle type
+                    case "truck":
+                        vehicle = new Truck(/* pass parameters extracted from vehicleData */);
+                        break;
+                    case "car":
+                        vehicle = new Car(/* pass parameters */);
+                        break;
+                    case "suv":
+                        vehicle = new SUV(/* pass parameters */);
+                        break;
+                    case "motorbike":
+                        vehicle = new MotorBike(/* pass parameters */);
+                        break;
+                    default:
+                        continue; // Skip unknown vehicle types
+                }
+
+                vehicleList.add(vehicle);
+            }
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+            return false;
+        }
+    }
 
 public void displayAllTruckInformation() {
     boolean found = false;
@@ -78,11 +112,11 @@ public boolean addVehicle(Vehicle vehicle) {
     return vehicleList.add(vehicle);
 }
 
-private boolean isVehicleType(Vehicle v, Class clazz) {
+private boolean isVehicleType(Vehicle v, Class<?> clazz) {
     return clazz.isInstance(v);
 }
 
-public int getNumberOfVehiclesByType(Class clazz) {
+public int getNumberOfVehiclesByType(Class<?> clazz) {
     int count = 0;
     for (Vehicle v : vehicleList) {
         if (isVehicleType(v, clazz)) {
@@ -103,5 +137,7 @@ public boolean saveVehicleList() {
         e.printStackTrace();
         return false;
     }
+}
+
 }
 

@@ -1,6 +1,5 @@
 package m.main;
 
-import m.vehicle.*;
 import m.vehicleManager.*;
 
 public class Main {
@@ -20,8 +19,8 @@ public class Main {
         vehicleManager.displayAllVehicleInformation();
 
         // Display all car information.
-        System.out.println("Displaying all car information:");
-        vehicleManager.displayAllCarInformation();
+        //System.out.println("Displaying all car information:");
+        //vehicleManager.displayAllCarInformation();
 
         // Display all truck information.
         System.out.println("Displaying all truck information:");
