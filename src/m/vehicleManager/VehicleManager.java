@@ -53,7 +53,7 @@ public void displayAllMotorBikeInformation() {
 
 public void displayVehicleInformation(Vehicle v) {
     if (vehicleList.contains(v)) {
-    // Assuming Vehicle class and its subclasses have a properly overridden toString method
+    // Need toString method
         System.out.println(v.toString());
     } else {
         System.out.println("Vehicle not found in the inventory.");
