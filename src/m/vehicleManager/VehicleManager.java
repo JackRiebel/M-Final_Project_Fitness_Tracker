@@ -60,7 +60,7 @@ public boolean initializeStock() {
                 vehicleList.add(vehicle);
                 // Debug: Print a message when a vehicle is added
                 //System.out.println("Adding vehicle to list: " + vehicle);
-            }
+            } 
         }
         return true;
     } catch (IOException e) {

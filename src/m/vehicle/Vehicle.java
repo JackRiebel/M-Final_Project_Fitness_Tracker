@@ -38,20 +38,19 @@ public abstract class Vehicle {
 	
 	@Override
 	public String toString() {
-	    return "Vehicle{" +
-	            "type='" + this.getClass().getSimpleName() + '\'' +
-	            ", model='" + model + '\'' +
-	            ", make='" + make + '\'' +
-	            ", modelYear=" + modelYear +
-	            ", price=" + price +
-	            ", color=" + color +
-	            ", fuelType=" + fuelType +
-	            ", mileage=" + mileage +
-	            ", mass=" + mass +
-	            ", cylinders=" + cylinders +
-	            ", gasTankCapacity=" + gasTankCapacity +
-	            ", startType=" + startType +
-	            '}';
+	    return "Vehicle:" +
+	            "type:'" + this.getClass().getSimpleName() + '\'' +
+	            ", model:'" + model + '\'' +
+	            ", make:'" + make + '\'' +
+	            ", modelYear:" + modelYear +
+	            ", price:" + price +
+	            ", color:" + color +
+	            ", fuelType:" + fuelType +
+	            ", mileage:" + mileage +
+	            ", mass:" + mass +
+	            ", cylinders:" + cylinders +
+	            ", gasTankCapacity:" + gasTankCapacity +
+	            ", startType:" + startType;
 	}
 
 }
