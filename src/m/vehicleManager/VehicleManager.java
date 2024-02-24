@@ -15,33 +15,52 @@ public class VehicleManager {
     public boolean initializeStock() {
         try (BufferedReader br = new BufferedReader(new FileReader(vehicleFilePath))) {
             String line;
+            br.readLine(); // Skip the header line
             while ((line = br.readLine()) != null) {
-                String[] vehicleData = line.split(",");
+                String[] vehicleData = line.split("\t"); // Assuming tab-separated values
 
-                // Check the type of vehicle and create appropriate object
-                Vehicle vehicle;
-                switch (vehicleData[0].toLowerCase()) { // Assuming first column is vehicle type
+                String type = vehicleData[0];
+                String model = vehicleData[1];
+                String make = vehicleData[2];
+                long modelYear = Long.parseLong(vehicleData[3]);
+                double price = Double.parseDouble(vehicleData[4]);
+                VehicleColor color = VehicleColor.valueOf(vehicleData[5]);
+                FuelType fuelType = FuelType.valueOf(vehicleData[6]);
+                double mileage = Double.parseDouble(vehicleData[7]);
+                double mass = Double.parseDouble(vehicleData[8]);
+                int cylinders = Integer.parseInt(vehicleData[9]);
+                double gasTankCapacity = Double.parseDouble(vehicleData[10]);
+                StartMechanism startType = StartMechanism.valueOf(vehicleData[11]);
+
+                Vehicle vehicle = null;
+                switch (type.toLowerCase()) {
                     case "truck":
-                        vehicle = new Truck(/* pass parameters extracted from vehicleData */);
-                        break;
-                    case "car":
-                        vehicle = new Car(/* pass parameters */);
-                        break;
-                    case "suv":
-                        vehicle = new SUV(/* pass parameters */);
+                        vehicle = new Truck(model, make, modelYear, price, color, fuelType, mileage, mass, cylinders, gasTankCapacity, startType);
                         break;
                     case "motorbike":
-                        vehicle = new MotorBike(/* pass parameters */);
+                        vehicle = new MotorBike(model, make, modelYear, price, color, fuelType, mileage, mass, cylinders, gasTankCapacity, startType);
                         break;
-                    default:
-                        continue; // Skip unknown vehicle types
+                    case "car":
+                        vehicle = new Car(model, make, modelYear, price, color, fuelType, mileage, mass, cylinders, gasTankCapacity, startType);
+                        break;
+                    case "suv":
+                        vehicle = new SUV(model, make, modelYear, price, color, fuelType, mileage, mass, cylinders, gasTankCapacity, startType);
+                        break;
                 }
 
-                vehicleList.add(vehicle);
+                if (vehicle != null) {
+                    vehicleList.add(vehicle);
+                }
             }
             return true;
         } catch (IOException e) {
             System.err.println("Error reading the file: " + e.getMessage());
+            return false;
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing numeric data: " + e.getMessage());
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error parsing enum data: " + e.getMessage());
             return false;
         }
     }
