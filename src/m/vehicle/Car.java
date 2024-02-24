@@ -1,9 +1,11 @@
 package m.vehicle;
 
 public class Car extends Vehicle {
-
-	public Car() {
-		// TODO Auto-generated constructor stub
-	}
-
+    public Car(String model, String make, long modelYear, double price, VehicleColor color,
+               FuelType fuelType, double mileage, double mass, int cylinders,
+               double gasTankCapacity, StartMechanism startType) {
+        super(model, make, modelYear, price, color, fuelType, mileage, mass, cylinders, gasTankCapacity, startType);
+    }
+    // Car-specific methods and overrides...
 }
+
