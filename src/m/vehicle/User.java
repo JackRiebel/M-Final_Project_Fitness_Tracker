@@ -13,6 +13,9 @@ public abstract class AbstractUser {
 	protected double runGoal;
 	
 	private static final DecimalFormat df = new DecimalFormat("#.##");
+
+	public User(){
+	}
 	
 	///Simple helper methods
 	
